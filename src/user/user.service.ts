@@ -11,6 +11,8 @@ import { User } from "./entities/user.entity";
 import { Repository } from "typeorm";
 import { ResponseUserDto } from "./dto/ResponseUserDto";
 import { adminUserDto } from "./dto/adminUserDto";
+import * as bcrypt from "bcrypt";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class UserService {
@@ -69,9 +71,14 @@ export class UserService {
         throw new BadRequestException(`Email already exists`);
       }
     }
+
     //solo campos para actualizar
     const fieldsToUpdate = { ...updateUserDto };
     delete fieldsToUpdate.id;
+
+    if (fieldsToUpdate.password) {
+      fieldsToUpdate.password = await bcrypt.hash(fieldsToUpdate.password, 10);
+    }
 
     Object.assign(user, fieldsToUpdate);
     return await this.userRepository.save(user);
