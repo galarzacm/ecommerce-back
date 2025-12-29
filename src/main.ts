@@ -36,13 +36,13 @@ async function bootstrap() {
   // const authGuard = app.get(AuthGuard);
   // app.useGlobalGuards(authGuard);
 
-  const categorieSeed = app.get(CategorieSeed);
-  await categorieSeed.seed();
-  console.log("La inserción de categorias ha terminado");
+  if (process.env.NODE_ENV !== "production") {
+    const categorieSeed = app.get(CategorieSeed);
+    await categorieSeed.seed();
 
-  const productSeed = app.get(ProductSeed);
-  await productSeed.seed();
-  console.log("La insercion de products ha terminado");
+    const productSeed = app.get(ProductSeed);
+    await productSeed.seed();
+  }
 
   const port = process.env.PORT || 3000;
   await app.listen(port, "0.0.0.0");
