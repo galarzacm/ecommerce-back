@@ -22,7 +22,7 @@ async function bootstrap() {
   SwaggerModule.setup("api", app, document);
 
   // Aplicar el filtro global para manejar todas las excepciones HTTP
-  app.useGlobalFilters(new GlobalExceptionFilter());
+  //app.useGlobalFilters(new GlobalExceptionFilter());
 
   //valida entradas (ej Body). si falla => BadRequestException
   app.useGlobalPipes(
