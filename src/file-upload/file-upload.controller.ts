@@ -16,6 +16,7 @@ import { AuthGuard } from "../guards/authGuard";
 import { RolesGuard } from "../guards/roles.guard";
 import { RolesDecorator } from "../decorators/roles/roles.decorator";
 import { RoleEnum } from "../enum/roles.enum";
+import type { Express } from "express";
 
 @Controller("files")
 @ApiTags("File-upload - endpoints / routes")

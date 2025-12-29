@@ -30,7 +30,9 @@ export class OnlyLoggedInGuard implements CanActivate {
       throw new NotFoundException("Order not found");
     }
     if (order.user.id !== user.sub && order.user.id !== user.id) {
-      throw new ForbiddenException("Access denied - the id does not belong to your order");
+      throw new ForbiddenException(
+        "Access denied - the id does not belong to your order",
+      );
     }
     return true;
   }
