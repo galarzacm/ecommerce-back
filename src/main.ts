@@ -5,7 +5,7 @@ import { CategorieSeed } from "./seeds/categorie-seed/categorieSeed";
 import { ProductSeed } from "./seeds/product-seed/productSeed";
 import { ValidationPipe } from "@nestjs/common";
 import { GlobalExceptionFilter } from "./middleware/http-exception.filter";
-import { AuthGuard } from "./guards/authGuard";
+//import { AuthGuard } from "./guards/authGuard";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -44,6 +44,7 @@ async function bootstrap() {
   await productSeed.seed();
   console.log("La insercion de products ha terminado");
 
-  await app.listen(process.env.PORT ?? 3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port, "0.0.0.0");
 }
 bootstrap();
